@@ -24,10 +24,7 @@ $(document).ready(function() {
   var x = [0,1];
   $(".roll").click(function() {
     var roll = rollDice();
-    console.log(playersArray[x[0]].htmlRollBtn);
-    console.log(playersArray[x[1]].htmlRollBtn);
     $(playersArray[x[0]].htmlDiceRoll).empty().append(roll);
-    console.log(playersArray[x[1]].htmlDiceRoll);
     playersArray[x[0]].currentScore += roll;
     if(roll === 1) {
       playersArray[x[0]].currentRoll = 0;
@@ -35,6 +32,7 @@ $(document).ready(function() {
       playersArray[x[0]].currentScore = 0;
       $(playersArray[x[1]].htmlCurrentRoll).empty().append(playersArray[x[0]].currentScore);
       $(playersArray[x[1]].htmlDiceRoll).empty().append("");
+      x.reverse();
     }
     $(playersArray[x[0]].htmlCurrentRoll).empty().append(playersArray[x[0]].currentScore);
   });
@@ -51,6 +49,5 @@ $(document).ready(function() {
     $(playersArray[x[1]].htmlCurrentRoll).empty().append(playersArray[x[1]].currentScore);
     $(playersArray[x[1]].htmlDiceRoll).empty().append("");
     x.reverse();
-    console.log(playersArray);
   });
 });
