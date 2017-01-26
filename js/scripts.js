@@ -16,58 +16,41 @@ var player2 = new Players("#p2-dice-roll", "#p2-current-roll", ".roll2", ".hold2
 var rollDice = function() {
   return Math.floor(Math.random()*6)+1;
 }
+var playersArray = [player1, player2];
+
 
 //User Interface
 $(document).ready(function() {
-  $(player1.htmlRollBtn).click(function() {
+  var x = [0,1];
+  $(".roll").click(function() {
     var roll = rollDice();
-    $(player1.htmlDiceRoll).empty().append(roll);
-    player1.currentScore += roll;
+    console.log(playersArray[x[0]].htmlRollBtn);
+    console.log(playersArray[x[1]].htmlRollBtn);
+    $(playersArray[x[0]].htmlDiceRoll).empty().append(roll);
+    console.log(playersArray[x[1]].htmlDiceRoll);
+    playersArray[x[0]].currentScore += roll;
     if(roll === 1) {
-      player1.currentRoll = 0;
+      playersArray[x[0]].currentRoll = 0;
       $(".p1Turn, .p2Turn").toggle();
-      $(player2.htmlCurrentRoll).empty().append(player1.currentScore);
-      $(player2.htmlDiceRoll).empty().append("");
+      playersArray[x[0]].currentScore = 0;
+      $(playersArray[x[1]].htmlCurrentRoll).empty().append(playersArray[x[0]].currentScore);
+      $(playersArray[x[1]].htmlDiceRoll).empty().append("");
     }
-    $(player1.htmlCurrentRoll).empty().append(player1.currentScore);
+    $(playersArray[x[0]].htmlCurrentRoll).empty().append(playersArray[x[0]].currentScore);
   });
 
-  $(player1.htmlHoldBtn).click(function() {
+  $(".hold").click(function() {
     $(".p1Turn, .p2Turn").toggle();
-    player1.overallScore += player1.currentScore;
-    $(player1.htmlScore).empty().append(player1.overallScore);
-    player1.currentScore = 0;
-    if(player1.overallScore >= 10) {
+    playersArray[x[0]].overallScore += playersArray[x[0]].currentScore;
+    $(playersArray[x[0]].htmlScore).empty().append(playersArray[x[0]].overallScore);
+    playersArray[x[0]].currentScore = 0;
+    if(playersArray[x[0]].overallScore >= 100) {
       $("#results").show();
-      $(".winner").append(player1.winString);
+      $(".winner").append(playersArray[x[0]].winString);
     }
-    $(player2.htmlCurrentRoll).empty().append(player2.currentScore);
-    $(player2.htmlDiceRoll).empty().append("");
+    $(playersArray[x[1]].htmlCurrentRoll).empty().append(playersArray[x[1]].currentScore);
+    $(playersArray[x[1]].htmlDiceRoll).empty().append("");
+    x.reverse();
+    console.log(playersArray);
   });
 });
-//   $(".roll2").click(function() {
-//     var roll = rollDice();
-//     $("#p2-dice-roll").empty().append(roll);
-//     diceGame.p2CurrentRoll += roll;
-//     if(roll === 1) {
-//       diceGame.p2CurrentRoll = 0;
-//       $(".p1Turn, .p2Turn").toggle();
-//       $("#p1-current-roll").empty().append(diceGame.p1CurrentRoll);
-//       $("#p1-dice-roll").empty().append("");
-//     }
-//     $("#p2-current-roll").empty().append(diceGame.p2CurrentRoll);
-//   });
-//
-//   $(".hold2").click(function() {
-//     $(".p1Turn, .p2Turn").toggle();
-//     diceGame.p2Score += diceGame.p2CurrentRoll;
-//     $("#p2-score").empty().append(diceGame.p2Score);
-//     diceGame.p2CurrentRoll = 0;
-//     if(diceGame.p2Score >= 100) {
-//       $("#results").show();
-//       $(".winner").append("PLAYER 2");
-//     }
-//     $("#p1-current-roll").empty().append(diceGame.p1CurrentRoll);
-//     $("#p1-dice-roll").empty().append("");
-//   });
-// });
