@@ -9,3 +9,19 @@
 .overallScore {
   margin-bottom: 0px;
 }
+
+.jumbotron h1 {
+  text-align: center;
+  text-shadow: 10px;
+}
+
+.jumbotron {
+  /*background-color: #c4deef;*/
+  background-image: url(../img/pattern.jpg);
+  background-size: cover;
+  color: #0f224f;
+}
+
+.bulletPoint {
+  list-style-type: circle;
+}
